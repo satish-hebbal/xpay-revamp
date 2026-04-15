@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description:
     "No foreign entity. No compliance headache. No failed transactions. xPay is the global payments infrastructure built for modern businesses.",
   keywords: ["payments", "global payments", "fintech", "xPay", "payment gateway"],
+  icons: {
+    icon: "/assets/xpay-favicon1.svg",
+  },
   openGraph: {
     title: "xPay — Global Payments Infrastructure",
     description: "Accept payments from every corner of the world.",

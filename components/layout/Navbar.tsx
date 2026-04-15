@@ -39,52 +39,54 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent"
       )}
     >
-      <nav className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center gap-8">
+      <nav className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0">
           <XPayLogo />
         </Link>
 
-        {/* Nav links — immediately after logo, left-aligned */}
-        <ul className="hidden lg:flex items-center gap-1 flex-1">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                className="px-3.5 py-2 text-sm font-medium text-xpay-text hover:text-black transition-colors rounded-lg hover:bg-gray-50"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Right CTA */}
-        <div className="hidden lg:flex items-center gap-2">
-          <Button variant="outline" size="md">
-            Talk to us
-          </Button>
-          <Button variant="primary" size="md">
-            Get started
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-          </Button>
+        {/* Desktop: nav links + CTAs */}
+        <div className="hidden lg:flex items-center gap-8 flex-1 ml-8">
+          <ul className="flex items-center gap-1 flex-1">
+            {navLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="px-3.5 py-2 text-sm font-medium text-xpay-text hover:text-black transition-colors rounded-lg hover:bg-gray-50"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="md">
+              Talk to us
+            </Button>
+            <Button variant="primary" size="md">
+              Get started
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </Button>
+          </div>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile: hamburger only */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden p-2 rounded-lg text-xpay-muted hover:text-xpay-text hover:bg-gray-50 transition-colors"
+          className="lg:hidden p-2 text-xpay-text transition-colors"
           aria-label="Toggle menu"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
+          {mobileOpen ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
       </nav>
 
@@ -121,9 +123,9 @@ function XPayLogo() {
       src="/assets/Xpay-logo.svg"
       alt="xPay"
       width={101}
-      height={22}
+      height={24}
       priority
-      className="h-[22px] w-auto"
+      className="h-[24px] w-auto"
     />
   );
 }
