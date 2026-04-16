@@ -4,23 +4,22 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 
 const companies = [
-  { name: "Shwet",      src: "/assets/companies/shwet.svg",      width: 92,  height: 33 },
-  { name: "Bolna",      src: "/assets/companies/bolna.svg",      width: 69,  height: 44 },
-  { name: "Remedo",     src: "/assets/companies/remoedo.svg",    width: 94,  height: 31 },
-  { name: "Primathon",  src: "/assets/companies/primathon.svg",  width: 106, height: 20 },
-  { name: "Karbon",     src: "/assets/companies/Karbon.svg",     width: 98,  height: 27 },
-  { name: "Biomarked",  src: "/assets/companies/biomarked.svg",  width: 123, height: 31 },
-  { name: "PeppyHop",   src: "/assets/companies/peppyhop.svg",   width: 107, height: 26 },
+  { name: "Shwet",      src: "/assets/companies/shwet.svg",      width: 92,  height: 33,  className: "h-6 w-auto object-contain" },
+  { name: "Bolna",      src: "/assets/companies/bolna.svg",      width: 69,  height: 44,  className: "h-9 w-auto object-contain" },
+  { name: "Remedo",     src: "/assets/companies/remoedo.svg",    width: 94,  height: 31,  className: "h-6 w-auto object-contain" },
+  { name: "Primathon",  src: "/assets/companies/primathon.svg",  width: 106, height: 20,  className: "h-6 w-auto object-contain" },
+  { name: "Karbon",     src: "/assets/companies/Karbon.svg",     width: 98,  height: 27,  className: "h-6 w-auto object-contain" },
+  { name: "Biomarked",  src: "/assets/companies/biomarked.svg",  width: 123, height: 31,  className: "h-6 w-auto object-contain" },
+  { name: "PeppyHop",   src: "/assets/companies/peppyhop.svg",   width: 107, height: 26,  className: "h-6 w-auto object-contain" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative h-[100svh] pt-[72px] bg-white flex flex-col overflow-hidden">
+    <section className="relative h-[120svh] pt-[72px] bg-white flex flex-col overflow-hidden">
       <div id="nav-sentinel" className="absolute top-[160px] left-0 h-1 w-full pointer-events-none" />
       {/* Hero asset — desktop */}
       <div
-        className="hidden lg:block absolute top-0 w-[58%] h-[110vh] pointer-events-none z-20"
-        style={{ right: "-4%" }}
+        className="hidden lg:block absolute -top-12 w-[58%] h-[115vh] pointer-events-none z-20 right-[-7rem] xl:right-[-4.5rem]"
       >
         <Image
           src="/assets/hero-asset-1.png"
@@ -44,7 +43,7 @@ export default function Hero() {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 max-w-[1200px] mx-auto px-6 w-full flex flex-col justify-start gap-8 pb-8 pt-14 lg:pt-0 lg:justify-center lg:gap-10 relative z-10">
+      <div className="flex-1 max-w-[1200px] mx-auto px-6 w-full flex flex-col justify-start gap-8 pb-8 pt-14 lg:pt-28 lg:justify-start lg:gap-10 relative z-10">
 
         {/* Hero copy — constrained left column */}
         <div className="flex flex-col max-w-[660px] relative z-10">
@@ -53,8 +52,23 @@ export default function Hero() {
           <div className="flex flex-wrap items-center gap-2 mb-5">
             {/* YC Badge */}
             <span
-              className="relative inline-flex items-center gap-1.5 px-2.5 h-8 rounded-full border cursor-pointer overflow-hidden group"
-              style={{ backgroundColor: "#FEFDFC", borderColor: "#FC6723" }}
+              className="relative inline-flex items-center gap-1.5 px-2.5 h-8 rounded-full border cursor-pointer overflow-hidden group transition-shadow duration-300"
+              style={{ backgroundColor: "#FEFDFC", borderColor: "#FC6723", boxShadow: "none" }}
+              onMouseEnter={e => {
+                e.currentTarget.style.boxShadow = [
+                  "inset 0 1px 3px rgba(255,255,255,0.95)",
+                  "inset 0 4px 8px rgba(255,255,255,0.6)",
+                  "inset 0 -4px 10px rgba(252,103,35,0.2)",
+                  "0 0 0 1.5px rgba(252,103,35,0.9)",
+                  "0 1px 0px rgba(255,180,130,0.6)",
+                  "0 4px 12px rgba(252,103,35,0.15)",
+                ].join(", ");
+                e.currentTarget.style.borderColor = "transparent";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "#FC6723";
+              }}
             >
               <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out skew-x-[-20deg]" style={{ background: "linear-gradient(to right, transparent, #FC672340, transparent)" }} />
               <span className="font-normal text-[#6B7280] text-[11px] leading-none">Backed by</span>
@@ -116,15 +130,15 @@ export default function Hero() {
         </div>
 
         {/* Trusted by — marquee, full width, below CTA */}
-        <div className="relative z-10 w-full lg:mt-16 lg:max-w-[1000px]">
+        <div className="relative z-10 w-full lg:mt-16 lg:max-w-[800px] min-[1291px]:max-w-[1000px]">
           <p className="text-sm font-medium mb-6" style={{ color: "rgba(0,0,0,0.25)" }}>
             Trusted by brands that move fast
           </p>
           <div
             className="overflow-hidden relative"
             style={{
-              maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+              maskImage: "linear-gradient(to right, transparent 0%, black 15%)",
+              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%)",
             }}
           >
             <div className="flex items-center gap-12 animate-marquee w-max">
@@ -135,7 +149,7 @@ export default function Hero() {
                     alt={company.name}
                     width={company.width}
                     height={company.height}
-                    className="h-6 w-auto object-contain"
+                    className={company.className}
                     unoptimized
                   />
                 </div>
