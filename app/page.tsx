@@ -1,18 +1,17 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
+import Fold2 from "@/components/sections/Fold2";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen" style={{ background: "#F8FAFD" }}>
       <Navbar />
 
       {/* Fold 1 — Hero */}
       <Hero />
 
       {/* Fold 2 */}
-      <section className="relative z-30 w-full min-h-screen bg-xpay-surface border-t border-xpay-border -mt-56 flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 2</span>
-      </section>
+      <Fold2 />
 
       {/* Fold 3 */}
       <section className="relative z-30 w-full min-h-screen bg-white border-t border-xpay-border flex items-center justify-center">
