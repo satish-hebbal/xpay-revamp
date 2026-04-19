@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import XGraphic from "@/components/ui/XGraphic";
 
 const companies = [
   { name: "Shwet",      src: "/assets/companies/shwet.svg",      width: 92,  height: 33,  className: "h-6 w-auto object-contain" },
@@ -16,18 +17,10 @@ const companies = [
 export default function Hero() {
   return (
     <section className="relative h-[120svh] pt-[72px] bg-white flex flex-col overflow-hidden">
-      <div id="nav-sentinel" className="absolute top-[160px] left-0 h-1 w-full pointer-events-none" />
+      <div id="nav-sentinel" className="absolute top-[100px] left-0 h-1 w-full pointer-events-none" />
       {/* Hero asset — desktop */}
-      <div
-        className="hidden lg:block absolute -top-12 w-[58%] h-[115vh] pointer-events-none z-20 right-[-7rem] xl:right-[-4.5rem]"
-      >
-        <Image
-          src="/assets/hero-asset-1.png"
-          alt="xPay global payments"
-          fill
-          priority
-          className="object-contain object-right-top select-none"
-        />
+      <div className="hidden lg:block absolute -top-16 w-[58%] h-[115vh] pointer-events-none z-20 right-[-13rem] xl:right-[-11rem]">
+        <XGraphic />
       </div>
 
       {/* Hero asset — mobile/tablet (absolute, behind content) */}
@@ -52,7 +45,7 @@ export default function Hero() {
           <div className="flex flex-wrap items-center gap-2 mb-5">
             {/* YC Badge */}
             <span
-              className="relative inline-flex items-center gap-1.5 px-2.5 h-8 rounded-full border cursor-pointer overflow-hidden group transition-shadow duration-300"
+              className="relative inline-flex items-center gap-2 px-3.5 h-10 rounded-full border cursor-pointer overflow-hidden group transition-shadow duration-300"
               style={{ backgroundColor: "#FEFDFC", borderColor: "#FC6723", boxShadow: "none" }}
               onMouseEnter={e => {
                 e.currentTarget.style.boxShadow = [
@@ -71,43 +64,44 @@ export default function Hero() {
               }}
             >
               <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out skew-x-[-20deg]" style={{ background: "linear-gradient(to right, transparent, #FC672340, transparent)" }} />
-              <span className="font-normal text-[#6B7280] text-[11px] leading-none">Backed by</span>
+              <span className="font-normal text-[#6B7280] text-[13px] leading-none">Backed by</span>
               <Image
                 src="/assets/YC-logo.svg"
                 alt="Y Combinator"
                 width={70}
                 height={20}
-                className="flex-shrink-0 h-[18px] w-auto"
+                className="flex-shrink-0 h-[22px] w-auto"
               />
             </span>
 
             {/* Product Hunt Badge */}
             <span
-              className="relative inline-flex items-center gap-1.5 px-2.5 h-8 rounded-full border cursor-pointer overflow-hidden group"
+              className="relative inline-flex items-center gap-2 px-3.5 h-10 rounded-full border cursor-pointer overflow-hidden group"
               style={{ backgroundColor: "#FFF0EE", borderColor: "#FF6255" }}
             >
               <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-[-20deg]" />
               <Image
                 src="/assets/product-hunt-logo.svg"
                 alt="Product Hunt"
-                width={16}
-                height={16}
-                style={{ marginLeft: "-2px" }}
+                width={24}
+                height={24}
+                style={{ marginLeft: "-6px" }}
                 className="flex-shrink-0"
               />
               <span className="flex flex-col gap-[1px]">
-                <span className="text-[8px] leading-none font-medium text-[#FF6154]">Product Hunt</span>
-                <span className="text-[10px] leading-none font-semibold text-[#0A0A0A]">#4 Product of the Day</span>
+                <span className="text-[9px] leading-none font-medium text-[#FF6154]">Product Hunt</span>
+                <span className="text-[12px] leading-none font-semibold text-[#0A0A0A]">#4 Product of the Day</span>
               </span>
             </span>
           </div>
 
           {/* Heading */}
           <h1
-            className="text-xpay-text leading-[1.08] tracking-[-0.03em] mb-4 text-balance text-[36px] sm:text-[44px] lg:text-[56px]"
+            className="text-xpay-text leading-[1.08] tracking-[-0.03em] mb-4 text-balance text-[36px] sm:text-[44px] lg:text-[60px]"
             style={{ fontWeight: 500 }}
           >
-            Accept Payments from every corner of the world.
+            Accept Payments from every corner of the{" "}
+            <span style={{ background: "linear-gradient(90deg, #2F88F6, #45B1FF,rgb(69, 181, 255), #45FFE9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>world</span>.
           </h1>
 
           {/* Subtext */}
@@ -130,7 +124,7 @@ export default function Hero() {
         </div>
 
         {/* Trusted by — marquee, full width, below CTA */}
-        <div className="relative z-10 w-full lg:mt-16 lg:max-w-[800px] min-[1291px]:max-w-[1000px]">
+        <div className="relative z-10 w-full lg:mt-16 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
           <p className="text-sm font-medium mb-6" style={{ color: "rgba(0,0,0,0.25)" }}>
             Trusted by brands that move fast
           </p>

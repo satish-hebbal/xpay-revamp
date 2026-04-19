@@ -17,6 +17,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -30,10 +31,22 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setHidden(y > lastY && y > 80);
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        hidden ? "-translate-y-full" : "translate-y-0",
         scrolled
           ? "bg-white/95 backdrop-blur-md border-b border-xpay-border shadow-sm"
           : "bg-white/40 backdrop-blur-md border-b border-white/20 2xl:bg-transparent 2xl:backdrop-blur-none 2xl:border-transparent"

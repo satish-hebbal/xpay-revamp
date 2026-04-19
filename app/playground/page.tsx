@@ -1,199 +1,145 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// ── G-Slant constants ─────────────────────────────────────────────
+const GRADIENT = "linear-gradient(120deg, rgba(0,255,255,0.51) 0%, rgba(21,232,157,0.51) 50%, rgba(86,255,161,0.51) 76%, rgba(4,229,115,0.51) 100%)";
+const TEXT_LINES = ["Send money", "instantly", "anywhere", "in the world", "with xPay"];
 
-const W = 200;
-const H = 380;
-const BEZEL = 60;    // how deep the bending goes from each edge
-const SCALE = 140;   // max pixel shift — higher = more dramatic bending
-
-// Convex squircle — smooth lens curve (Apple's choice)
-function convexSquircle(t: number) {
-  return Math.pow(1 - Math.pow(1 - t, 4), 0.25);
+function TextBehind() {
+  return (
+    <div style={{ fontSize: 52, fontWeight: 900, lineHeight: 1.15, letterSpacing: -1, textAlign: "center", color: "#111", userSelect: "none", padding: "60px 40px" }}>
+      {TEXT_LINES.map((l, i) => <span key={i} style={{ display: "block" }}>{l}</span>)}
+    </div>
+  );
 }
 
-function buildDisplacementMap(w: number, h: number, bezel: number): string {
-  const canvas = document.createElement("canvas");
-  canvas.width = w;
-  canvas.height = h;
-  const ctx = canvas.getContext("2d")!;
-  const img = ctx.createImageData(w, h);
-  const d = img.data;
-
-  // Pre-compute max slope for normalization
-  let maxSlope = 0;
-  const N = 512;
-  for (let i = 0; i <= N; i++) {
-    const t = i / N;
-    const eps = 1e-4;
-    const t0 = Math.max(0, t - eps);
-    const t1 = Math.min(1, t + eps);
-    const slope = Math.abs(
-      (convexSquircle(t1) - convexSquircle(t0)) / (t1 - t0)
-    );
-    if (slope > maxSlope) maxSlope = slope;
-  }
-
-  for (let py = 0; py < h; py++) {
-    for (let px = 0; px < w; px++) {
-      const dL = px;
-      const dR = w - 1 - px;
-      const dT = py;
-      const dB = h - 1 - py;
-      const minDist = Math.min(dL, dR, dT, dB);
-
-      let rx = 128, ry = 128;
-
-      if (minDist < bezel) {
-        const t = minDist / bezel;       // 0 = edge, 1 = interior
-        const eps = 1e-4;
-        const t0 = Math.max(0, t - eps);
-        const t1 = Math.min(1, t + eps);
-        // Normalized slope (0–1)
-        const slope =
-          ((convexSquircle(t1) - convexSquircle(t0)) / (t1 - t0)) / maxSlope;
-
-        // Inward bending: edges pull background content toward center
-        // → opposite sign of "outward" convex lens
-        let dx = 0, dy = 0;
-        if      (minDist === dL) dx =  slope;   // left edge → pull right
-        else if (minDist === dR) dx = -slope;   // right edge → pull left
-        else if (minDist === dT) dy =  slope;   // top edge → pull down
-        else                     dy = -slope;   // bottom edge → pull up
-
-        rx = Math.round(128 + dx * 127);
-        ry = Math.round(128 + dy * 127);
-      }
-
-      const i = (py * w + px) * 4;
-      d[i]     = rx;
-      d[i + 1] = ry;
-      d[i + 2] = 128;
-      d[i + 3] = 255;
-    }
-  }
-
-  ctx.putImageData(img, 0, 0);
-  return canvas.toDataURL();
-}
+// ── Blue Stack constants ──────────────────────────────────────────
+const G1 = "linear-gradient(180deg, #054cff 0%, #236acb 40%,rgb(106, 193, 255) 75%,rgb(118, 198, 255) 100%)";
+const G2 = "linear-gradient(180deg,rgb(21, 97, 228) 0%, #308fff 50%, #2f90ff 100%)";
+const G3 = "linear-gradient(180deg, #247af3 0%, #2078ff 50%, #2179ff 100%)";
+const BW = 240;
+const BH = 1100;
 
 export default function Playground() {
-  const [mapUrl, setMapUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    setMapUrl(buildDisplacementMap(W, H, BEZEL));
-  }, []);
-
   return (
-    <div
-      style={{
-        background: "#fff",
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {/* SVG filter — must live in the DOM, size 0 so it's invisible */}
-      {mapUrl && (
-        <svg
-          width={0}
-          height={0}
-          style={{ position: "absolute", overflow: "visible" }}
-        >
-          <defs>
-            <filter
-              id="liquidGlass"
-              x="0%"
-              y="0%"
-              width="100%"
-              height="100%"
-              filterUnits="objectBoundingBox"
-              colorInterpolationFilters="sRGB"
-            >
-              {/* Load our displacement map */}
-              <feImage
-                href={mapUrl}
-                x="0%"
-                y="0%"
-                width="100%"
-                height="100%"
-                preserveAspectRatio="none"
-                result="dispMap"
-              />
-              {/* Shift background pixels by R/G channel values */}
-              <feDisplacementMap
-                in="SourceGraphic"
-                in2="dispMap"
-                scale={SCALE}
-                xChannelSelector="R"
-                yChannelSelector="G"
-                result="refracted"
-              />
-            </filter>
-          </defs>
-        </svg>
-      )}
+    <>
+      <style>{`
+        /* ── SVG filters ── */
+        .glow-border { position: absolute; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.85); box-sizing: border-box; }
+        .glow-border::before { content: ''; position: absolute; inset: -60%; animation: spinBorder linear infinite; transform-origin: center; }
+        .glow-border::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-sizing: border-box; border-radius: inherit; }
+        .glow-border .fill { position: absolute; inset: 1.5px; }
 
-      <div style={{ position: "relative" }}>
-        {/* Background text */}
-        <div
-          style={{
-            fontSize: 52,
-            fontWeight: 900,
-            lineHeight: 1.15,
-            color: "#111",
-            userSelect: "none",
-            letterSpacing: -1,
-            textAlign: "center",
-            padding: "60px 40px",
-          }}
-        >
-          Send money<br />
-          instantly<br />
-          anywhere<br />
-          in the world<br />
-          with xPay
-        </div>
+        .gb-1 { border-radius: 0; }
+        .gb-1 .fill { border-radius: 0; }
+        .gb-1::before {
+          background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.05) 20deg, rgba(255,255,255,0.5) 50deg, rgba(255,255,255,1) 60deg, rgba(255,255,255,0.5) 70deg, rgba(255,255,255,0.05) 95deg, transparent 120deg, transparent 180deg, rgba(255,255,255,0.05) 200deg, rgba(255,255,255,0.5) 230deg, rgba(255,255,255,1) 240deg, rgba(255,255,255,0.5) 250deg, rgba(255,255,255,0.05) 275deg, transparent 300deg, transparent 360deg);
+          animation-duration: 10s; animation-delay: 0s;
+        }
+        .gb-2 { border-radius: 0; }
+        .gb-2 .fill { border-radius: 0; }
+        .gb-2::before {
+          background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.02) 60deg, rgba(255,255,255,0.15) 110deg, rgba(255,255,255,0.45) 145deg, rgba(255,255,255,0.9) 165deg, rgba(255,255,255,1) 172deg, rgba(255,255,255,0.7) 178deg, rgba(255,255,255,0.1) 195deg, transparent 210deg, transparent 360deg);
+          animation-duration: 14s; animation-delay: -5s;
+        }
+        .gb-3 { border-radius: 0; }
+        .gb-3 .fill { border-radius: 0; }
+        .gb-3::before {
+          background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.8) 10deg, rgba(255,255,255,1) 15deg, rgba(255,255,255,0.8) 20deg, transparent 35deg, transparent 120deg, rgba(255,255,255,0.8) 130deg, rgba(255,255,255,1) 135deg, rgba(255,255,255,0.8) 140deg, transparent 155deg, transparent 240deg, rgba(255,255,255,0.8) 250deg, rgba(255,255,255,1) 255deg, rgba(255,255,255,0.8) 260deg, transparent 275deg, transparent 360deg);
+          animation-duration: 5s; animation-delay: -1s;
+        }
 
-        {/* Glass card — backdrop-filter: url() is Chrome only */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        @keyframes spinBorder { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .fill-1 { background-size: 200% 200% !important; animation: gradDrift1 9s ease-in-out infinite alternate; }
+        .fill-2 { background-size: 200% 200% !important; animation: gradDrift2 13s ease-in-out infinite alternate; }
+        .fill-3 { background-size: 200% 200% !important; animation: gradDrift3 7s ease-in-out infinite alternate; }
+
+        @keyframes gradDrift1 { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
+        @keyframes gradDrift2 { 0% { background-position: 100% 0%; } 100% { background-position: 0% 100%; } }
+        @keyframes gradDrift3 { 0% { background-position: 50% 0%; } 100% { background-position: 50% 100%; } }
+
+        .glass-layer1 {
+          isolation: isolate;
+          position: absolute;
+          inset: 0;
+          filter: url(#glass-distortion);
+          backdrop-filter: blur(6px);
+        }
+        .glass-layer2 {
+          position: absolute;
+          inset: 0;
+          box-shadow:
+            inset 1px 1px 0px 0 rgb(192 228 233 / 70%),
+            inset -3px 0px 10px 0 rgb(192 228 233 / 60%),
+            inset 3px 2px 3px 0 rgb(192 228 233 / 60%),
+            inset -1px -1px 3px 1px rgba(255,255,255,0.45),
+            inset -1px -5px 10px -1px rgba(255,255,255,0.45);
+        }
+      `}</style>
+
+      <svg width={0} height={0} style={{ position: "absolute" }}>
+        <defs>
+          <filter id="glass-distortion" x="-150%" y="-150%" width="400%" height="400%" filterUnits="objectBoundingBox">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5" result="turbulence" />
+            <feComponentTransfer in="turbulence" result="mapped">
+              <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+              <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+              <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+            </feComponentTransfer>
+            <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+            <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lightingColor="white" result="specLight">
+              <fePointLight x="-200" y="-200" z="300" />
+            </feSpecularLighting>
+            <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
+            <feDisplacementMap in="SourceGraphic" in2="softMap" scale="80" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
+
+      <div style={{ background: "#fff", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", gap: 120 }}>
+
+        {/* ── G-Slant ── */}
+        <div style={{ position: "relative", width: 520, height: 600 }}>
+          {/* Blue component behind the green glass */}
           <div
+            aria-hidden
             style={{
-              width: W,
-              height: H,
-              transform: "skewX(33deg)",
-              borderRadius: 28,
-              overflow: "hidden",
-              background:
-                "linear-gradient(160deg, rgba(0,255,255,0.4) 0%, rgba(21,232,157,0.4) 50%, rgba(86,255,161,0.4) 76%, rgba(4,229,115,0.4) 100%)",
-              backdropFilter: "url(#liquidGlass) blur(4px) saturate(180%)",
-              WebkitBackdropFilter: "url(#liquidGlass) blur(4px) saturate(180%)",
-              boxShadow:
-                "inset -9px 17px 15px rgba(255,255,255,0.51), inset 1px -15px 27px rgba(255,255,255,0.91)",
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 0,
+              pointerEvents: "none",
             }}
           >
-            {/* Top-left specular highlight */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%)",
-                pointerEvents: "none",
-              }}
-            />
+            <div style={{ transform: "scale(0.78) skewX(-32deg)", transformOrigin: "center" }}>
+              <div style={{ position: "relative", width: BW, height: BH }}>
+                <div className="glow-border gb-1" style={{ inset: 0 }}>
+                  <div className="fill fill-1" style={{ background: G1 }} />
+                </div>
+                <div className="glow-border gb-2" style={{ top: 0, left: "50%", transform: "translateX(-50%)", width: BW * 0.6, height: BH }}>
+                  <div className="fill fill-2" style={{ background: G2 }} />
+                </div>
+                <div className="glow-border gb-3" style={{ top: 0, left: "50%", transform: "translateX(-50%)", width: BW * 0.18, height: BH }}>
+                  <div className="fill fill-3" style={{ background: G3 }} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Green glass in front */}
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
+            <div style={{ position: "relative", borderTopLeftRadius: 16, borderTopRightRadius: 6, borderBottomRightRadius: 16, borderBottomLeftRadius: 6, transform: "skewX(32deg)" }}>
+              <div style={{ width: 175, height: 300, borderTopLeftRadius: 16, borderTopRightRadius: 6, borderBottomRightRadius: 16, borderBottomLeftRadius: 6, position: "relative", overflow: "hidden", background: GRADIENT, border: "1px solid rgba(255,255,255,0.7)", boxSizing: "border-box" }}>
+                <div className="glass-layer1" />
+                <div className="glass-layer2" />
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
-    </div>
+    </>
   );
 }
