@@ -100,11 +100,11 @@ function SubscriptionTable() {
                   <p className="text-[13px] font-medium text-[#111] truncate">{row.name}</p>
                   <p className="text-[11px] text-[#9CA3AF]">{row.sub}</p>
                 </div>
-                <div className="flex items-center gap-1.5 w-[180px] flex-shrink-0">
+                <div className="flex items-center gap-1.5 flex-shrink-0 lg:w-[180px]">
                   <div className="w-6 h-6 rounded-full bg-[#F5F5F5] flex items-center justify-center flex-shrink-0">
                     <Image src={methodIcon[row.method]} alt={row.method} width={14} height={14} />
                   </div>
-                  <span className="text-[12px] text-[#555]">
+                  <span className="hidden lg:inline text-[12px] text-[#555]">
                     {row.method}
                     {row.last  ? ` ···· ${row.last}`  : ""}
                     {row.email ? ` · ${row.email}`     : ""}
@@ -360,7 +360,7 @@ const payIcons = [
 
 function PaymentLinkCard() {
   return (
-    <div className="rounded-tr-2xl rounded-br-2xl bg-white  border border-[#E5E7EB] p-5">
+    <div className="rounded-2xl lg:rounded-tl-none lg:rounded-bl-none bg-white border border-[#E5E7EB] p-5">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 rounded-xl bg-[#F0F4FF] flex items-center justify-center">
           <Image src="/assets/gen-icons/scan-icon.svg" alt="qr" width={20} height={20} />
@@ -600,15 +600,19 @@ function SectionCard({
   grad,
   gradStyle,
   cardStyle,
+  grad2,
+  gradStyle2,
 }: {
   children: React.ReactNode;
   grad: "a" | "b";
   gradStyle?: React.CSSProperties;
   cardStyle?: React.CSSProperties;
+  grad2?: "a" | "b";
+  gradStyle2?: React.CSSProperties;
 }) {
   const defaultStyle: React.CSSProperties = { width: "90%", right: "-3rem", bottom: "-4rem" };
   return (
-    <div className="relative rounded-3xl border border-[#E5E7EB] p-7 overflow-hidden" style={{ background: "#ffffff", ...cardStyle }}>
+    <div className="relative rounded-3xl border border-[#E5E7EB] p-5 lg:p-7 overflow-hidden" style={{ background: "#ffffff", ...cardStyle }}>
       <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
         <img
           src={`/assets/grad-${grad}.png`}
@@ -616,6 +620,14 @@ function SectionCard({
           className="absolute h-auto"
           style={{ ...defaultStyle, ...gradStyle }}
         />
+        {grad2 && (
+          <img
+            src={`/assets/grad-${grad2}.png`}
+            alt=""
+            className="absolute h-auto"
+            style={{ ...defaultStyle, ...gradStyle2 }}
+          />
+        )}
       </div>
       <div className="relative z-10">{children}</div>
     </div>
@@ -630,82 +642,66 @@ export default function Fold2() {
       <div className="max-w-[1200px] mx-auto px-6 space-y-6">
 
         {/* Row 1: 65% / 35% */}
-        <div className="grid gap-6" style={{ gridTemplateColumns: "65fr 35fr" }}>
+        <div className="grid gap-6 grid-cols-1 lg:grid-cols-[65fr_35fr]">
           {/* S1 grad controls: width / right / bottom */}
           <SectionCard grad="a" gradStyle={{ width: "90%", right: "-12rem", bottom: "-12rem" }}>
-            <h2 className="text-[32px] font-medium text-[#000000] leading-tight mb-1">
+            <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
               India&apos;s only gateway<br />for recurring global billing.
             </h2>
-            <p className="text-[16px] font-medium text-[#000000BF] mb-6">
+            <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               Collect subscriptions in 100+ currencies.<br />Ideal for SaaS. Set it once, collect forever.
             </p>
             {/* table bleeds out right + bottom */}
-            <div className="-mr-7 -mb-7">
+            <div className="-mr-5 -mb-5 lg:-mr-7 lg:-mb-7">
               <SubscriptionTable />
             </div>
           </SectionCard>
 
           {/* S2 grad controls: width / right / bottom */}
-          <SectionCard grad="b" gradStyle={{ width: "120%", left: "-4rem", right: "auto", bottom: "-4rem", transform: "rotate(-30deg)" }} >
-            <h2 className="text-[32px] font-medium text-[#000000] leading-tight mb-1">
+          <SectionCard grad="b" gradStyle={{ width: "120%", left: "-4rem", right: "auto", bottom: "-4rem", transform: "rotate(-30deg)" }}>
+            <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
               A US Bank account for<br />your Indian entity
             </h2>
-            <p className="text-[16px] font-medium text-[#000000BF] mb-6">
+            <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               USD, GBP, CAD. Settled in INR within 24hrs.<br />FIRC auto-generated.
             </p>
-            <div style={{ transform: "translateY(20px)" }}><BankCard /></div>
+            <div className="lg:translate-y-[20px]"><BankCard /></div>
           </SectionCard>
         </div>
 
         {/* Row 2: 35% / 65% */}
-        <div className="grid gap-6" style={{ gridTemplateColumns: "35fr 65fr" }}>
+        <div className="grid gap-6 grid-cols-1 lg:grid-cols-[35fr_65fr]">
           {/* S3 grad controls: width / right / bottom */}
           <SectionCard grad="b" gradStyle={{ width: "90%", right: "-3rem", bottom: "-4rem", filter: "blur(18px)" }}>
-            <h2 className="text-[32px] font-medium text-[#000000] leading-tight mb-1">
+            <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
               Auto-collect taxes<br />across 100+ countries
             </h2>
-            <p className="text-[16px] font-medium text-[#000000BF] mb-6">
+            <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               All taxes calculated, collected &amp; remitted automatically
             </p>
-            <div style={{ transform: "translateY(55px)" }}><TaxCard /></div>
+            <div className="lg:translate-y-[55px]"><TaxCard /></div>
           </SectionCard>
 
           {/* S4 grad controls: width / right / bottom */}
-          <SectionCard grad="a" gradStyle={{ width: "90%", right: "-3rem", bottom: "-4rem" }}>
-            <h2 className="text-[32px] font-medium text-[#000000] leading-tight mb-1">
+          <SectionCard grad="a" gradStyle={{ width: "90%", right: "-5rem", bottom: "-4rem" }} grad2="b" gradStyle2={{ width: "70%", left: "-23rem", right: "auto", bottom: "-20rem" }}>
+            <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
               Collect payments with<br />a single link
             </h2>
-            <p className="text-[16px] font-medium text-[#000000BF] mb-6">
+            <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               No Devs needed, live in 30 seconds
             </p>
-            <div className="grid gap-4 relative" style={{ gridTemplateColumns: "1.25fr 1fr" }}>
-              {/* connector: sits behind both cards (z:1), cards overlap it (z:3) */}
+            <div className="grid gap-4 relative grid-cols-1 lg:grid-cols-[1.25fr_1fr]">
+              {/* connector: hidden on mobile, visible on desktop */}
               <svg
+                className="hidden lg:block"
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "320px", pointerEvents: "none", zIndex: 1 }}
               >
-                {/* static base line */}
-                <path
-                  d="M 170,155 V 255 Q 170,285 197,285 H 420"
-                  stroke="#E2E8F0"
-                  strokeWidth="1.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-
-                {/* traveling shimmer */}
-                <path
-                  d="M 170,155 V 255 Q 170,285 197,285 H 420"
-                  stroke="#1B5FEC"
-                  strokeWidth="1.5"
-                  strokeOpacity="0.35"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeDasharray="60 365"
-                >
+                <path d="M 170,155 V 255 Q 170,285 197,285 H 420" stroke="#E2E8F0" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path d="M 170,155 V 255 Q 170,285 197,285 H 420" stroke="#1B5FEC" strokeWidth="1.5" strokeOpacity="0.35" fill="none" strokeLinecap="round" strokeDasharray="60 365">
                   <animate attributeName="stroke-dashoffset" from="0" to="-425" dur="2.4s" repeatCount="indefinite" calcMode="linear" />
                 </path>
               </svg>
-              <div style={{ alignSelf: "start", marginLeft: "-33px", marginTop: "60px", position: "relative", zIndex: 3 }}><PaymentLinkCard /></div>
+              <div className="self-start relative z-[3] lg:-ml-[33px] lg:mt-[60px]"><PaymentLinkCard /></div>
               <div style={{ position: "relative", zIndex: 3, minWidth: 0, overflow: "hidden" }}><CheckoutCard /></div>
             </div>
           </SectionCard>
