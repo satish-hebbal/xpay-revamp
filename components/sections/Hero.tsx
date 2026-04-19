@@ -16,33 +16,31 @@ const companies = [
 
 export default function Hero() {
   return (
-    <section className="relative h-[120svh] pt-[72px] bg-white flex flex-col overflow-hidden">
+    <section className="relative w-full h-auto lg:h-[120svh] pt-[72px] bg-white flex flex-col overflow-hidden">
       <div id="nav-sentinel" className="absolute top-[100px] left-0 h-1 w-full pointer-events-none" />
-      {/* Hero asset — desktop */}
-      <div className="hidden lg:block absolute -top-16 w-[58%] h-[115vh] pointer-events-none z-20 right-[-13rem] xl:right-[-11rem]">
+      {/* Hero asset — desktop: clip inside positioned frame */}
+      <div className="hidden lg:block absolute -top-16 w-[58%] h-[115vh] overflow-hidden pointer-events-none z-20 right-[-13rem] xl:right-[-11rem]">
         <XGraphic />
       </div>
 
-      {/* Hero asset — mobile/tablet (absolute, behind content) */}
-      <div className="lg:hidden absolute -top-[0px] -right-64 w-[130%] h-[90%] pointer-events-none z-0">
-        <Image
-          src="/assets/hr-asset-mobile-1.svg"
-          alt="xPay global payments"
-          fill
-          priority
-          unoptimized
-          className="object-contain object-right-top select-none -scale-x-100"
-        />
+      {/* Hero asset — mobile: bleed freely; clipping is only at section edges (full width), no inner overflow box */}
+      <div
+        className="lg:hidden pointer-events-none absolute left-0 right-0 top-[52px] z-[5] h-[min(48vh,420px)] min-h-[260px]"
+        aria-hidden
+      >
+        <div className="absolute top-6 bottom-0 left-[40%] min-h-[260px] -right-[58vw] translate-x-[16vw] translate-y-2 sm:left-[44%] sm:-right-[64vw] sm:translate-x-[18vw]">
+          <XGraphic />
+        </div>
       </div>
 
       {/* Main content */}
-      <div className="flex-1 max-w-[1200px] mx-auto px-6 w-full flex flex-col justify-start gap-8 pb-8 pt-14 lg:pt-28 lg:justify-start lg:gap-10 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-6 w-full flex flex-col justify-start gap-8 pb-0 lg:pb-8 pt-14 lg:flex-1 lg:pt-28 lg:justify-start lg:gap-10 relative z-10">
 
         {/* Hero copy — constrained left column */}
         <div className="flex flex-col max-w-[660px] relative z-10">
 
           {/* Badges */}
-          <div className="flex flex-wrap items-center gap-2 mb-5">
+          <div className="flex flex-wrap items-center gap-2 mb-7 lg:mb-5">
             {/* YC Badge */}
             <span
               className="relative inline-flex items-center gap-2 px-3.5 h-10 rounded-full border cursor-pointer overflow-hidden group transition-shadow duration-300"
@@ -97,7 +95,7 @@ export default function Hero() {
 
           {/* Heading */}
           <h1
-            className="text-xpay-text leading-[1.08] tracking-[-0.03em] mb-4 text-balance text-[36px] sm:text-[44px] lg:text-[60px]"
+            className="text-xpay-text leading-[1.08] tracking-[-0.03em] mb-6 lg:mb-4 text-balance text-[36px] sm:text-[44px] lg:text-[60px]"
             style={{ fontWeight: 500 }}
           >
             Accept Payments from every corner of the{" "}
@@ -106,15 +104,17 @@ export default function Hero() {
 
           {/* Subtext */}
           <p
-            className="font-medium leading-relaxed mb-7 text-base sm:text-lg lg:text-xl"
+            className="font-medium leading-relaxed mb-9 lg:mb-7 text-base sm:text-lg lg:text-xl"
             style={{ color: "rgba(0,0,0,0.5)" }}
           >
-            No foreign entity. No compliance headache. No failed transactions.
+            No foreign entity. No compliance headache.
+            <br className="sm:hidden" aria-hidden="true" />
+            {" "}No failed transactions.
           </p>
 
           {/* CTA */}
           <div>
-            <Button variant="primary" size="lg" className="font-semibold w-full lg:w-auto justify-center">
+            <Button variant="primary" size="lg" className="font-semibold w-full lg:w-auto justify-center border-2 border-white lg:border-0">
               Get started
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -124,9 +124,11 @@ export default function Hero() {
         </div>
 
         {/* Trusted by — marquee, full width, below CTA */}
-        <div className="relative z-10 w-full lg:mt-16 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
+        <div className="relative z-10 w-full mt-6 border-t border-[#E5E7EB] pt-4 pb-20 lg:mt-16 lg:pt-8 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
+          <div className="lg:hidden absolute inset-0 -left-6 -right-6 bg-white z-[1]" />
+          <div className="relative z-[2]">
           <p className="text-sm font-medium mb-6" style={{ color: "rgba(0,0,0,0.25)" }}>
-            Trusted by brands that move fast
+            Trusted by brands that move fast.
           </p>
           <div
             className="overflow-hidden relative"
@@ -150,12 +152,13 @@ export default function Hero() {
               ))}
             </div>
           </div>
+          </div>
         </div>
 
       </div>
 
-      {/* Bottom border strip */}
-      <div className="border-t bg-green-500 z-30" />
+      {/* Bottom edge — desktop separator only (mobile: trusted block white extends to Fold2) */}
+      <div className="hidden lg:block border-t border-[#E5E7EB] bg-white z-30" />
     </section>
   );
 }

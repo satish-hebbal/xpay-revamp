@@ -63,6 +63,15 @@ export default function XGraphic() {
             inset -1px -1px 3px 1px rgba(255,255,255,0.45),
             inset -1px -5px 10px -1px rgba(255,255,255,0.45);
         }
+
+        /* Mobile / narrow: heavy SVG displacement + backdrop often paints blank; keep gradients visible */
+        @media (max-width: 1023px) {
+          .xg-glass-layer1 {
+            filter: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
+        }
       `}</style>
 
       <svg width={0} height={0} style={{ position: "absolute" }}>

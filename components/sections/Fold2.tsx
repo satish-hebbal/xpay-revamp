@@ -638,7 +638,7 @@ function SectionCard({
 
 export default function Fold2() {
   return (
-    <section className="relative z-30 w-full bg-[#F8FAFD] border-t border-[#E5E7EB] -mt-56 pt-56 pb-24">
+    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-24 lg:bg-[#F8FAFD] lg:border-t lg:border-[#E5E7EB] lg:-mt-56 lg:pt-56">
       <div className="max-w-[1200px] mx-auto px-6 space-y-6">
 
         {/* Row 1: 65% / 35% */}
