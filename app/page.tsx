@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import Fold2 from "@/components/sections/Fold2";
+import Fold3 from "@/components/sections/Fold3";
 
 export default function Home() {
   return (
@@ -14,9 +15,7 @@ export default function Home() {
       <Fold2 />
 
       {/* Fold 3 */}
-      <section className="relative z-30 w-full min-h-screen bg-white border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 3</span>
-      </section>
+      <Fold3 />
 
       {/* Fold 4 */}
       <section className="relative z-30 w-full min-h-screen bg-xpay-surface border-t border-xpay-border flex items-center justify-center">

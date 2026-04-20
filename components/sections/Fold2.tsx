@@ -716,12 +716,36 @@ function SectionCard({
   );
 }
 
+function GradSuffix({ children }: { children: React.ReactNode }) {
+  return (
+    <span style={{ background: "linear-gradient(90deg, #2F88F6, #45B1FF, #45FFE9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+      {children}
+    </span>
+  );
+}
+
 /* ─── Main Fold2 Export ─── */
 
 export default function Fold2() {
   return (
-    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-24 lg:bg-white lg:border-t lg:border-[#E5E7EB] lg:-mt-56 lg:pt-56">
+    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-24 lg:bg-white lg:border-t lg:border-[#E5E7EB] lg:-mt-52 lg:pt-10">
       <div className="max-w-[1200px] mx-auto px-6 space-y-6">
+
+        {/* Stats bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-0 pt-10 pb-16">
+          <div className="flex-1 flex flex-col items-center text-center">
+            <span className="text-[36px] lg:text-[48px] font-semibold text-[#111]">1200<GradSuffix>+</GradSuffix></span>
+            <span className="text-[15px] lg:text-[17px] text-[#6B7280] mt-0.5">Enterprises and Startups</span>
+          </div>
+          <div className="flex-1 flex flex-col items-center text-center">
+            <span className="text-[36px] lg:text-[48px] font-semibold text-[#111]">$400<GradSuffix>M</GradSuffix></span>
+            <span className="text-[15px] lg:text-[17px] text-[#6B7280] mt-0.5">Annual Transactions</span>
+          </div>
+          <div className="flex-1 flex flex-col items-center text-center">
+            <span className="text-[36px] lg:text-[48px] font-semibold text-[#111]">160<GradSuffix>+</GradSuffix></span>
+            <span className="text-[15px] lg:text-[17px] text-[#6B7280] mt-0.5">Supported Countries</span>
+          </div>
+        </div>
 
         {/* Row 1: 65% / 35% */}
         <div className="grid gap-6 grid-cols-1 lg:grid-cols-[65fr_35fr]">
@@ -783,8 +807,20 @@ export default function Fold2() {
                   <animate attributeName="stroke-dashoffset" from="0" to="-425" dur="2.4s" repeatCount="indefinite" calcMode="linear" />
                 </path>
               </svg>
-              <div className="self-start relative z-[3] lg:-ml-[33px] lg:mt-[60px]"><PaymentLinkCard /></div>
+              <div className="self-stretch relative z-[3] lg:-ml-[33px] lg:mt-[60px] flex flex-col">
+                <PaymentLinkCard />
+                {/* desktop only — bottom-left of column */}
+                <div className="hidden lg:flex mt-auto flex-col items-start pl-10 pb-2 gap-2">
+                  <Image src="/assets/Pci.svg" alt="PCI DSS Compliant" width={0} height={0} style={{ width: "auto", height: "36px" }} />
+                  <span className="text-[13px] text-[#225e63] font-medium">100% Safe &amp; Secure</span>
+                </div>
+              </div>
               <div style={{ position: "relative", zIndex: 3, minWidth: 0, overflow: "hidden" }}><CheckoutCard /></div>
+              {/* mobile only — after CheckoutCard */}
+              <div className="flex lg:hidden flex-col items-start pl-2 pt-2 gap-2">
+                <Image src="/assets/Pci.svg" alt="PCI DSS Compliant" width={0} height={0} style={{ width: "auto", height: "36px" }} />
+                <span className="text-[13px] text-[#225e63] font-medium">100% Safe &amp; Secure</span>
+              </div>
             </div>
           </SectionCard>
         </div>
