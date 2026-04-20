@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Fold3() {
   return (
-    <section className="relative z-30 w-full bg-white py-20 lg:pb-0 overflow-hidden">
+    <section className="relative z-30 w-full bg-white py-0 lg:pb-0 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* Text block */}
@@ -18,12 +18,22 @@ export default function Fold3() {
 
         {/* Dashboard image */}
         <div className="relative w-full overflow-hidden">
+          {/* Mobile */}
+          <Image
+            src="/assets/dashboard-blk-mobile-1.svg"
+            alt="xPay dashboard showing live payment analytics"
+            width={1296}
+            height={843}
+            className="w-full h-auto block sm:hidden"
+            priority
+          />
+          {/* Desktop */}
           <Image
             src="/assets/dashboard-blk.svg"
             alt="xPay dashboard showing live payment analytics"
             width={1296}
             height={545}
-            className="w-full h-auto"
+            className="w-full h-auto hidden sm:block"
             priority
           />
         </div>
