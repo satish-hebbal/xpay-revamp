@@ -158,6 +158,7 @@ function BankCard() {
   const [idx, setIdx] = useState(0);
   const [visible, setVisible] = useState(true);
   const [shine, setShine] = useState(false);
+  const [tab, setTab] = useState<"fedwire" | "ach">("fedwire");
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -178,26 +179,23 @@ function BankCard() {
     <div className="rounded-2xl border border-[#E5E7EB] p-5" style={{ background: "rgba(255,255,255,0.75)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
       {/* tabs — static, never fades */}
       <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-2">
-          <button className="px-3 py-1 rounded-full bg-[#F0F4FF] text-[#1B5FEC] text-[12px] font-medium border border-[#1B5FEC]/20">Fed Wire</button>
-          <button className="px-3 py-1 rounded-full bg-[#F5F5F5] text-[#888] text-[12px] font-medium">ACH</button>
+        <div className="flex items-center bg-white/50 rounded-full p-[2px] gap-[2px] flex-shrink-0">
+          <button onClick={() => setTab("fedwire")} className={`px-2.5 py-0.5 rounded-full text-[11px] font-medium whitespace-nowrap transition-all duration-200 ${tab === "fedwire" ? "bg-white text-[#1B5FEC] shadow-sm" : "text-[#888]"}`}>Fed Wire</button>
+          <button onClick={() => setTab("ach")} className={`px-2.5 py-0.5 rounded-full text-[11px] font-medium whitespace-nowrap transition-all duration-200 ${tab === "ach" ? "bg-white text-[#1B5FEC] shadow-sm" : "text-black/50"}`}>ACH</button>
         </div>
-        <div className="flex items-center gap-3 text-[12px] text-[#888]">
-          <span>USD ($)</span>
-          <span>Business Checking</span>
-        </div>
+        <span className="text-[11px] text-[#9CA3AF] whitespace-nowrap" style={{ fontFamily: "'JetBrains Mono', monospace" }}>USD ($) · Business Checking</span>
       </div>
 
-      <p className="text-[11px] text-[#1B5FEC] mb-1">Beneficiary Name</p>
+      <p className="text-[11px] text-[#1B5FEC] mb-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Beneficiary Name</p>
       <p className="text-[16px] font-semibold text-[#111] mb-4" style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease" }}>{acc.beneficiary}</p>
 
       <div className="flex gap-8 mb-4">
         <div>
-          <p className="text-[11px] text-[#1B5FEC] mb-1">Routing Number</p>
+          <p className="text-[11px] text-[#1B5FEC] mb-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Routing Number</p>
           <p className="text-[16px] font-semibold text-[#111]" style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease" }}>{acc.routing}</p>
         </div>
         <div>
-          <p className="text-[11px] text-[#1B5FEC] mb-1">Account Number</p>
+          <p className="text-[11px] text-[#1B5FEC] mb-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Account Number</p>
           <div style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease" }}>
             <p className="text-[16px] font-semibold text-[#111]">•••• •••• {acc.account}</p>
           </div>
@@ -206,7 +204,7 @@ function BankCard() {
 
       <div className="flex items-end justify-between">
         <div>
-          <p className="text-[11px] text-[#1B5FEC] mb-1">Bank Information</p>
+          <p className="text-[11px] text-[#1B5FEC] mb-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>Bank Information</p>
           <p className="text-[12px] text-[#555]" style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease" }}>{acc.bank}</p>
           <p className="text-[12px] text-[#555]" style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease" }}>{acc.city}</p>
           <p className="text-[12px] text-[#22C55E] mt-1">Settled in INR · 24hrs</p>
@@ -594,14 +592,91 @@ function CheckoutSuccess() {
   );
 }
 
+/* ─── Blue Stack decoration ─── */
+
+const BLUE_STACK_CSS = `
+  .bs-glow-border { position: absolute; overflow: hidden; }
+  .bs-glow-border::before { content: ''; position: absolute; inset: -60%; transform-origin: center; }
+  .bs-glow-border::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-sizing: border-box; border-radius: inherit; }
+  .bs-gb-1::after { border: 1px solid rgba(255,255,255,0.85); animation: bsBorderPulse 5.2s ease-in-out infinite; }
+  .bs-gb-2::after { border: 1px solid rgba(255,255,255,0.85); animation: bsBorderPulse 5.2s ease-in-out infinite; animation-delay: -1.7s; }
+  .bs-gb-3::after { border: 1px solid rgba(255,255,255,0.85); animation: bsBorderPulse 5.2s ease-in-out infinite; animation-delay: -3.5s; }
+  @keyframes bsBorderPulse { 0% { opacity: 0.2; } 50% { opacity: 1; } 100% { opacity: 0.2; } }
+  .bs-glow-border .bs-fill { position: absolute; inset: 1.5px; }
+  .bs-gb-1::before {
+    background: conic-gradient(from 0deg,
+      transparent 0deg, rgba(255,255,255,0.03) 15deg, rgba(255,255,255,0.4) 45deg,
+      rgba(255,255,255,0.95) 58deg, rgba(255,255,255,1) 63deg,
+      rgba(255,255,255,0.4) 78deg, rgba(255,255,255,0.03) 100deg,
+      transparent 130deg, transparent 175deg,
+      rgba(255,255,255,0.03) 195deg, rgba(255,255,255,0.35) 225deg,
+      rgba(255,255,255,0.85) 240deg, rgba(255,255,255,0.35) 255deg,
+      rgba(255,255,255,0.03) 280deg, transparent 310deg, transparent 360deg);
+    animation: bsSpin1 11.3s cubic-bezier(0.4,0,0.6,1) infinite;
+  }
+  .bs-gb-2::before {
+    background: conic-gradient(from 0deg,
+      transparent 0deg, rgba(255,255,255,0.01) 55deg, rgba(255,255,255,0.12) 100deg,
+      rgba(255,255,255,0.55) 138deg, rgba(255,255,255,1) 150deg,
+      rgba(255,255,255,0.55) 162deg, rgba(255,255,255,0.08) 185deg,
+      transparent 200deg, transparent 360deg);
+    animation: bsSpin2 8.7s linear infinite; animation-delay: -3.2s;
+  }
+  .bs-gb-3::before {
+    background: conic-gradient(from 0deg,
+      transparent 0deg, rgba(255,255,255,0.6) 8deg, rgba(255,255,255,1) 12deg,
+      rgba(255,255,255,0.6) 16deg, transparent 28deg, transparent 115deg,
+      rgba(255,255,255,0.5) 123deg, rgba(255,255,255,0.95) 127deg,
+      rgba(255,255,255,0.5) 131deg, transparent 143deg, transparent 232deg,
+      rgba(255,255,255,0.7) 239deg, rgba(255,255,255,1) 243deg,
+      rgba(255,255,255,0.7) 247deg, transparent 259deg, transparent 360deg);
+    animation: bsSpin3 4.1s linear infinite; animation-delay: -1.6s;
+  }
+  @keyframes bsSpin1 { 0% { transform: rotate(0deg) scale(1); } 40% { transform: rotate(148deg) scale(1.04); } 70% { transform: rotate(251deg) scale(0.97); } 100% { transform: rotate(360deg) scale(1); } }
+  @keyframes bsSpin2 { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+  @keyframes bsSpin3 { 0% { transform: rotate(0deg); } 30% { transform: rotate(108deg) scale(1.06); } 60% { transform: rotate(216deg) scale(0.95); } 100% { transform: rotate(360deg); } }
+  .bs-fill-1 { background-size: 220% 220% !important; animation: bsGradDrift1 9.4s ease-in-out infinite alternate; }
+  .bs-fill-2 { background-size: 200% 200% !important; animation: bsGradDrift2 6.1s cubic-bezier(0.45,0.05,0.55,0.95) infinite alternate; animation-delay: -2.5s; }
+  .bs-fill-3 { background-size: 240% 240% !important; animation: bsGradDrift3 13.7s ease-in-out infinite alternate; animation-delay: -7s; }
+  @keyframes bsGradDrift1 { 0% { background-position: 0% 0%; } 50% { background-position: 80% 50%; } 100% { background-position: 100% 100%; } }
+  @keyframes bsGradDrift2 { 0% { background-position: 100% 0%; } 50% { background-position: 20% 60%; } 100% { background-position: 0% 100%; } }
+  @keyframes bsGradDrift3 { 0% { background-position: 30% 0%; } 40% { background-position: 70% 40%; } 100% { background-position: 50% 100%; } }
+`;
+
+const BS_G1 = "linear-gradient(180deg, #054cff 0%, #236acb 40%, #45b1ff 75%, #4db4ff 100%)";
+const BS_G2 = "linear-gradient(180deg, #196bf6 0%, #308fff 50%, #2f90ff 100%)";
+const BS_G3 = "linear-gradient(180deg, #247af3 0%, #2078ff 50%, #2179ff 100%)";
+
+function BlueStack({ scale = 0.35 }: { scale?: number }) {
+  const BW = 260, BH = 950;
+  return (
+    <>
+      <style>{BLUE_STACK_CSS}</style>
+      <div style={{ width: BW * scale, height: BH * scale, transform: `skewX(-32deg)`, position: "relative", transformOrigin: "bottom center" }}>
+        <div className="bs-glow-border bs-gb-1" style={{ inset: 0 }}>
+          <div className="bs-fill bs-fill-1" style={{ background: BS_G1 }} />
+        </div>
+        <div className="bs-glow-border bs-gb-2" style={{ top: 0, left: "50%", transform: "translateX(-50%)", width: BW * 0.6 * scale, height: BH * scale }}>
+          <div className="bs-fill bs-fill-2" style={{ background: BS_G2 }} />
+        </div>
+        <div className="bs-glow-border bs-gb-3" style={{ top: 0, left: "50%", transform: "translateX(-50%)", width: BW * 0.18 * scale, height: BH * scale }}>
+          <div className="bs-fill bs-fill-3" style={{ background: BS_G3 }} />
+        </div>
+      </div>
+    </>
+  );
+}
+
 /* ─── Reusable card wrapper with gradient inside ─── */
 function SectionCard({
   children,
   grad,
   gradStyle,
+  gradClassName,
   cardStyle,
   grad2,
   gradStyle2,
+  behind,
 }: {
   children: React.ReactNode;
   grad: "a" | "b";
@@ -609,6 +684,8 @@ function SectionCard({
   cardStyle?: React.CSSProperties;
   grad2?: "a" | "b";
   gradStyle2?: React.CSSProperties;
+  gradClassName?: string;
+  behind?: React.ReactNode;
 }) {
   const defaultStyle: React.CSSProperties = { width: "90%", right: "-3rem", bottom: "-4rem" };
   return (
@@ -617,7 +694,7 @@ function SectionCard({
         <img
           src={`/assets/grad-${grad}.png`}
           alt=""
-          className="absolute h-auto"
+          className={`absolute h-auto${gradClassName ? ` ${gradClassName}` : ""}`}
           style={{ ...defaultStyle, ...gradStyle }}
         />
         {grad2 && (
@@ -629,6 +706,11 @@ function SectionCard({
           />
         )}
       </div>
+      {behind && (
+        <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden">
+          {behind}
+        </div>
+      )}
       <div className="relative z-10">{children}</div>
     </div>
   );
@@ -638,7 +720,7 @@ function SectionCard({
 
 export default function Fold2() {
   return (
-    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-24 lg:bg-[#F8FAFD] lg:border-t lg:border-[#E5E7EB] lg:-mt-56 lg:pt-56">
+    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-24 lg:bg-white lg:border-t lg:border-[#E5E7EB] lg:-mt-56 lg:pt-56">
       <div className="max-w-[1200px] mx-auto px-6 space-y-6">
 
         {/* Row 1: 65% / 35% */}
@@ -658,14 +740,14 @@ export default function Fold2() {
           </SectionCard>
 
           {/* S2 grad controls: width / right / bottom */}
-          <SectionCard grad="b" gradStyle={{ width: "120%", left: "-4rem", right: "auto", bottom: "-4rem", transform: "rotate(-30deg)" }}>
+          <SectionCard grad="b" gradStyle={{ width: "120%", left: "-4rem", right: "auto", bottom: "-5rem", transform: "rotate(-30deg)" }} gradClassName="grad-center-mobile" behind={<div style={{ position: "absolute", bottom: "0px", right: "80px" }}><BlueStack scale={0.35} /></div>}>
             <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
               A US Bank account for<br />your Indian entity
             </h2>
             <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               USD, GBP, CAD. Settled in INR within 24hrs.<br />FIRC auto-generated.
             </p>
-            <div className="lg:translate-y-[20px]"><BankCard /></div>
+            <div className="lg:translate-y-[28px]"><BankCard /></div>
           </SectionCard>
         </div>
 

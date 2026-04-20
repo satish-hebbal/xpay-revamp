@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (max-width: 1023px) {
+  .grad-center-mobile {
+    left: 50% !important;
+    right: auto !important;
+    bottom: -4rem !important;
+    top: auto !important;
+    width: 100% !important;
+    transform: translateX(-50%) rotate(-30deg) !important;
+  }
+}
+
+/* ── JetBrains Mono ── */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbarins-mono/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbarins-mono/JetBrainsMono-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ── SF Pro Display – local font faces ── */
 @font-face {
   font-family: 'SF Pro Display';

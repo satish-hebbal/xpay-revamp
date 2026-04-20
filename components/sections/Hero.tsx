@@ -124,7 +124,7 @@ export default function Hero() {
         </div>
 
         {/* Trusted by — marquee, full width, below CTA */}
-        <div className="relative z-10 w-full mt-6 border-t border-[#E5E7EB] pt-4 pb-20 lg:mt-16 lg:pt-8 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
+        <div className="relative z-10 w-full mt-4 pt-4 pb-20 lg:mt-4 lg:pt-8 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
           <div className="lg:hidden absolute inset-0 -left-6 -right-6 bg-white z-[1]" />
           <div className="relative z-[2]">
           <p className="text-sm font-medium mb-6" style={{ color: "rgba(0,0,0,0.25)" }}>
