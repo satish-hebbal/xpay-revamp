@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fold4-slide-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-300px); }
+}
+@keyframes fold4-slide-down {
+  0%   { transform: translateY(-300px); }
+  100% { transform: translateY(0); }
+}
+@keyframes fold4-pulse-line {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+@keyframes fold4-slide-up-mobile {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-510px); }
+}
+@keyframes fold4-slide-down-mobile {
+  0%   { transform: translateY(-510px); }
+  100% { transform: translateY(0); }
+}
+
 @media (max-width: 1023px) {
   .grad-center-mobile {
     left: 50% !important;

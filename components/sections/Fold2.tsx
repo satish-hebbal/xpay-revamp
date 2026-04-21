@@ -766,7 +766,7 @@ export default function Fold2() {
           {/* S2 grad controls: width / right / bottom */}
           <SectionCard grad="b" gradStyle={{ width: "120%", left: "-4rem", right: "auto", bottom: "-5rem", transform: "rotate(-30deg)" }} gradClassName="grad-center-mobile" behind={<div style={{ position: "absolute", bottom: "0px", right: "80px" }}><BlueStack scale={0.35} /></div>}>
             <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
-              A US Bank account for<br />your Indian entity
+              A US Bank account for<br />your Indian entity.
             </h2>
             <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               USD, GBP, CAD. Settled in INR within 24hrs.<br />FIRC auto-generated.
@@ -780,7 +780,7 @@ export default function Fold2() {
           {/* S3 grad controls: width / right / bottom */}
           <SectionCard grad="b" gradStyle={{ width: "90%", right: "-3rem", bottom: "-4rem", filter: "blur(18px)" }}>
             <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
-              Auto-collect taxes<br />across 100+ countries
+              Auto-collect taxes<br />across 100+ countries.
             </h2>
             <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               All taxes calculated, collected &amp; remitted automatically
@@ -791,7 +791,7 @@ export default function Fold2() {
           {/* S4 grad controls: width / right / bottom */}
           <SectionCard grad="a" gradStyle={{ width: "90%", right: "-5rem", bottom: "-4rem" }} grad2="b" gradStyle2={{ width: "70%", left: "-23rem", right: "auto", bottom: "-20rem" }}>
             <h2 className="text-[22px] lg:text-[32px] font-medium text-[#000000] leading-tight mb-1">
-              Collect payments with<br />a single link
+              Collect payments with<br />a single link.
             </h2>
             <p className="text-[14px] lg:text-[16px] font-medium text-[#000000BF] mb-6">
               No Devs needed, live in 30 seconds

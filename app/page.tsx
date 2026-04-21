@@ -1,7 +1,13 @@
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import Fold2 from "@/components/sections/Fold2";
 import Fold3 from "@/components/sections/Fold3";
+import Fold4 from "@/components/sections/Fold4";
+import FoldBenefits from "@/components/sections/FoldBenefits";
+import Fold5 from "@/components/sections/Fold5";
+import Fold7 from "@/components/sections/Fold7";
+import Fold8 from "@/components/sections/Fold8";
 
 export default function Home() {
   return (
@@ -18,40 +24,26 @@ export default function Home() {
       <Fold3 />
 
       {/* Fold 4 */}
-      <section className="relative z-30 w-full min-h-screen bg-xpay-surface border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 4</span>
-      </section>
+      <Fold4 />
+
+      {/* Benefits */}
+      <FoldBenefits />
 
       {/* Fold 5 */}
-      <section className="relative z-30 w-full min-h-screen bg-white border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 5</span>
-      </section>
+      <Fold5 />
 
-      {/* Fold 6 */}
-      <section className="relative z-30 w-full min-h-screen bg-xpay-surface border-t border-xpay-border flex items-center justify-center">
+      {/* Fold 6 — placeholder */}
+      <section className="relative z-30 w-full min-h-[200px] bg-white border-t border-[#E5E7EB] flex items-center justify-center">
         <span className="text-2xl font-semibold text-gray-300">Fold 6</span>
       </section>
 
-      {/* Fold 7 */}
-      <section className="relative z-30 w-full min-h-screen bg-white border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 7</span>
-      </section>
+      {/* Fold 7 — Testimonials */}
+      <Fold7 />
 
-      {/* Fold 8 */}
-      <section className="relative z-30 w-full min-h-screen bg-xpay-surface border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 8</span>
-      </section>
+      {/* Fold 8 — FAQ */}
+      <Fold8 />
 
-      {/* Fold 9 */}
-      <section className="relative z-30 w-full min-h-screen bg-white border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 9</span>
-      </section>
-
-      {/* Fold 10 */}
-      <section className="relative z-30 w-full min-h-screen bg-xpay-surface border-t border-xpay-border flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 10</span>
-      </section>
-
+      <Footer />
     </main>
   );
 }

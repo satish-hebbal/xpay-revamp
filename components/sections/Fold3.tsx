@@ -18,13 +18,22 @@ export default function Fold3() {
 
         {/* Dashboard image */}
         <div className="relative w-full overflow-hidden">
+          {/* grad-b behind the dashboard */}
+          <Image
+            src="/assets/grad-b.png"
+            alt=""
+            aria-hidden
+            width={1296}
+            height={843}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+          />
           {/* Mobile */}
           <Image
             src="/assets/dashboard-blk-mobile-1.svg"
             alt="xPay dashboard showing live payment analytics"
             width={1296}
             height={843}
-            className="w-full h-auto block sm:hidden"
+            className="relative z-10 w-full h-auto block sm:hidden"
             priority
           />
           {/* Desktop */}
@@ -33,7 +42,7 @@ export default function Fold3() {
             alt="xPay dashboard showing live payment analytics"
             width={1296}
             height={545}
-            className="w-full h-auto hidden sm:block"
+            className="relative z-10 w-full h-auto hidden sm:block"
             priority
           />
         </div>
