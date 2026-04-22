@@ -159,19 +159,15 @@ export default function FoldBenefits() {
           {DIFFERENTIATORS.map((item, i) => (
             <div
               key={i}
-              className="flex flex-col gap-4 rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-6"
+              className="flex flex-col justify-end gap-4 rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-6 min-h-[400px]"
             >
               <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center shrink-0">
                 {item.icon}
               </div>
-              <div>
-                <p className="text-[15px] font-semibold text-[#0A0A0A] mb-1.5" style={sf}>
-                  {item.title}
-                </p>
-                <p className="text-[13px] text-[#6B7280] leading-relaxed" style={sf}>
-                  {item.desc}
-                </p>
-              </div>
+              <p className="text-[15px] font-semibold leading-relaxed" style={sf}>
+                <span style={{ color: "#000000" }}>{item.title}{" "}</span>
+                <span style={{ color: "rgba(0,0,0,0.5)", fontWeight: 400 }}>{item.desc}</span>
+              </p>
             </div>
           ))}
         </div>

@@ -121,7 +121,7 @@ function PulsingDivider({ index }: { index: number }) {
 
 export default function Fold4() {
   return (
-    <section className="relative z-30 w-full bg-white pt-20 pb-0">
+    <section className="relative z-30 w-full bg-white pt-20 pb-0 border-b border-[#E5E7EB]">
       {/* header */}
       <div className="max-w-[1200px] mx-auto px-6 mb-14 mt-16">
         <h2
