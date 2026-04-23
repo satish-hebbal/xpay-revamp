@@ -11,7 +11,7 @@ const DIFFERENTIATORS = [
   {
     image: "/assets/payment-plat-icons/firc.png",
     imgHeight: "100%",
-   
+    imgOffsetX: "25px",
     title: "Instant FIRC in Dashboard",
     desc: "GST-compliant FIRCs auto-generated for every transaction, no chasing your bank.",
   },
@@ -71,7 +71,7 @@ export default function FoldBenefits() {
                   src={item.image}
                   alt={item.title}
                   className="w-full object-contain"
-                  style={{ height: item.imgHeight }}
+                  style={{ height: item.imgHeight, marginLeft: (item as { imgOffsetX?: string }).imgOffsetX }}
                 />
               </div>
               <div className="flex-1 lg:h-[30%] flex flex-col justify-start p-4">
