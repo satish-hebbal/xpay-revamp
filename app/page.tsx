@@ -7,6 +7,7 @@ import Fold3 from "@/components/sections/Fold3";
 import Fold4 from "@/components/sections/Fold4";
 import FoldBenefits from "@/components/sections/FoldBenefits";
 import Fold5 from "@/components/sections/Fold5";
+import FoldPricing from "@/components/sections/FoldPricing";
 import Fold7 from "@/components/sections/Fold7";
 import Fold8 from "@/components/sections/Fold8";
 
@@ -35,6 +36,9 @@ export default function Home() {
 
       {/* Dev banner */}
       <FoldDevBanner />
+
+      {/* Pricing */}
+      <FoldPricing />
 
       {/* Fold 7 — Testimonials */}
       <Fold7 />

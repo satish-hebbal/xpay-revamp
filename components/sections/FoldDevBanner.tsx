@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 
 export default function FoldDevBanner() {
   return (
-    <section className="relative z-30 w-full bg-white border-t border-[#E5E7EB] pt-12 pb-12 lg:pt-16 lg:pb-16">
+    <section className="relative z-30 w-full bg-white pt-6 pb-6 lg:pt-8 lg:pb-8">
       <div className="max-w-[1200px] mx-auto px-6 mb-12">
         <p
           className="text-[20px] max-w-[850px] lg:text-[24px] font-medium text-[#000000]/75 leading-relaxed"
