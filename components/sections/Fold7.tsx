@@ -43,7 +43,8 @@ export default function Fold7() {
             className="text-[36px] sm:text-[48px] lg:text-[54px] font-medium text-[#0A0A0A] leading-[1.05] tracking-[-0.03em] mb-5"
             style={sf}
           >
-            Loved by{" "}
+            Trusted by Indian businesses
+            {" "}
             <span
               style={{
                 background:
@@ -53,7 +54,7 @@ export default function Fold7() {
                 backgroundClip: "text",
               }}
             >
-              builders.
+              going global
             </span>
           </h2>
           <p className="text-[16px] lg:text-[18px] text-[#6B7280] leading-relaxed" style={sf}>

@@ -9,9 +9,9 @@ const lineHBottom = { ...lineH, backgroundPosition: "0 100%" };
 const lineHTop    = { ...lineH, backgroundPosition: "0 0" };
 const lineV = { backgroundImage: `repeating-linear-gradient(to bottom, ${DASH})`, backgroundSize: "1px 100%", backgroundRepeat: "no-repeat", backgroundPosition: "0 0" };
 
-const G1 = "linear-gradient(180deg, #054cff 0%, #236acb 40%, #45b1ff 75%, #4db4ff 100%)";
-const G2 = "linear-gradient(180deg, #196bf6 0%, #308fff 50%, #2f90ff 100%)";
-const G3 = "linear-gradient(180deg, #247af3 0%, #2078ff 50%, #2179ff 100%)";
+const G1 = "linear-gradient(180deg,rgb(0, 26, 90) 0%,rgb(0, 10, 24) 40%,rgb(0, 0, 0) 75%,rgb(7, 38, 59) 100%)";
+const G2 = "linear-gradient(180deg,rgb(0, 19, 51) 0%,rgb(0, 0, 0) 50%,rgb(0, 44, 95) 100%)";
+const G3 = "linear-gradient(180deg,rgb(0, 98, 255) 0%,rgb(0, 31, 77) 50%,rgb(0, 17, 43) 100%)";
 
 const LINKS = {
   Product: ["Features", "Pricing", "API Docs", "Integrations", "Changelog"],
@@ -22,7 +22,7 @@ const LINKS = {
 
 export default function Footer() {
   return (
-    <footer className="relative z-30 w-full overflow-hidden" style={{ backgroundColor: "rgb(2, 5, 12)" }}>
+    <footer className="relative z-30 w-full overflow-hidden" style={{ backgroundColor: "rgb(0, 8, 26)" }}>
 
 
       {/* CTA band */}
@@ -83,7 +83,7 @@ export default function Footer() {
           </div>
 
           {/* Green glass panel — right edge */}
-          <div className="absolute top-0 bottom-0 right-[-90px] lg:right-[150px] flex items-center justify-end" style={{ zIndex: 1 }}>
+          <div className="absolute -top-36 lg:top-0 bottom-0 right-[-90px] lg:right-[150px] flex items-center justify-end" style={{ zIndex: 1 }}>
             <div style={{ position: "relative", transform: "skewX(32deg)" }}>
               <div style={{ width: 120, height: 160, position: "relative", overflow: "hidden", background: "linear-gradient(120deg, rgba(0,255,255,0.51) 0%, rgba(21,232,157,0.51) 50%, rgba(86,255,161,0.51) 76%, rgba(4,229,115,0.51) 100%)", border: "1px solid rgba(255,255,255,0.7)", boxSizing: "border-box", borderTopLeftRadius: 12, borderTopRightRadius: 4, borderBottomRightRadius: 12, borderBottomLeftRadius: 4 }}>
                 <div className="fg-glass1" />
@@ -129,7 +129,10 @@ export default function Footer() {
       <div className="relative z-10 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-4">
           {Object.entries(LINKS).map(([heading, items], i) => (
-            <div key={heading} className="p-8" style={i > 0 ? lineV : undefined}>
+            <div
+            key={heading}
+            className={`p-8 ${i > 0 ? "sm:footer-line-v" : ""}`}
+          >
               <h4
                 className="text-[15px] font-semibold text-[#006AFF] tracking-widest mb-5"
                 style={sf}

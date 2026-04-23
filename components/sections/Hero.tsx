@@ -16,7 +16,7 @@ const companies = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-auto lg:h-[120svh] pt-[72px] bg-white flex flex-col overflow-hidden">
+    <section className="relative w-full h-auto lg:h-[126svh] pt-[72px] bg-white flex flex-col overflow-hidden">
       <div id="nav-sentinel" className="absolute top-[100px] left-0 h-1 w-full pointer-events-none" />
       {/* Hero asset — desktop: clip inside positioned frame */}
       <div className="hidden lg:block absolute -top-16 w-[58%] h-[115vh] overflow-hidden pointer-events-none z-20 right-[-13rem] xl:right-[-11rem]">
@@ -28,13 +28,13 @@ export default function Hero() {
         className="lg:hidden pointer-events-none absolute left-0 right-0 top-[52px] z-[5] h-[min(48vh,420px)] min-h-[260px]"
         aria-hidden
       >
-        <div className="absolute top-6 bottom-0 left-[40%] min-h-[260px] -right-[58vw] translate-x-[16vw] translate-y-2 sm:left-[44%] sm:-right-[64vw] sm:translate-x-[18vw]">
+        <div className="absolute top-6 bottom-0 left-[40%] min-h-[260px] -right-[80vw] translate-x-[16vw] translate-y-2 sm:left-[44%] sm:-right-[64vw] sm:translate-x-[18vw]">
           <XGraphic />
         </div>
       </div>
 
       {/* Main content */}
-      <div className="max-w-[1200px] mx-auto px-6 w-full flex flex-col justify-start gap-8 pb-0 lg:pb-8 pt-14 lg:flex-1 lg:pt-28 lg:justify-start lg:gap-10 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-6 w-full flex flex-col justify-start gap-8 pb-0 lg:pb-8 pt-2 lg:flex-1 lg:pt-28 lg:justify-start lg:gap-10 relative z-10">
 
         {/* Hero copy — constrained left column */}
         <div className="flex flex-col max-w-[660px] relative z-10">
@@ -98,8 +98,11 @@ export default function Hero() {
             className="text-xpay-text leading-[1.08] tracking-[-0.03em] mb-6 lg:mb-4 text-balance text-[36px] sm:text-[44px] lg:text-[60px]"
             style={{ fontWeight: 500 }}
           >
-            Accept Payments from every corner of the{" "}
-            <span style={{ background: "linear-gradient(90deg, #2F88F6, #45B1FF,rgb(69, 181, 255), #45FFE9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>world</span>.
+            The International<br/>
+            Payment Gateway Built for{" "}
+            <span style={{ background: "linear-gradient(90deg,rgb(0, 115, 255), #45B1FF,rgb(69, 181, 255),rgb(0, 225, 255))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Indian Businesses</span>
+            <span style={{ background: "linear-gradient(90deg,rgb(0, 110, 255))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>.</span>
+
           </h1>
 
           {/* Subtext */}
@@ -107,14 +110,13 @@ export default function Hero() {
             className="font-medium leading-relaxed mb-9 lg:mb-7 text-base sm:text-lg lg:text-xl"
             style={{ color: "rgba(0,0,0,0.5)" }}
           >
-            No foreign entity. No compliance headache.
-            <br className="sm:hidden" aria-hidden="true" />
-            {" "}No failed transactions.
+           95% success rate. Local acquiring across 160+ countries. Settled in INR
+           within 24hrs.
           </p>
 
           {/* CTA */}
           <div>
-            <Button variant="primary" size="lg" className="font-semibold w-full lg:w-auto justify-center border-2 border-white lg:border-0">
+            <Button variant="primary" size="lg" className="font-semibold w-full lg:w-auto justify-center border border-white lg:border-0">
               Get started
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -124,7 +126,7 @@ export default function Hero() {
         </div>
 
         {/* Trusted by — marquee, full width, below CTA */}
-        <div className="relative z-10 w-full mt-4 pt-4 pb-20 lg:mt-4 lg:pt-8 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
+        <div className="relative z-10 w-full mt-4 pt-4 pb-20 lg:mt-4 lg:pt-0 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
           <div className="lg:hidden absolute inset-0 -left-6 -right-6 bg-white z-[1]" />
           <div className="relative z-[2]">
           <p className="text-sm font-medium mb-6" style={{ color: "rgba(0,0,0,0.25)" }}>
