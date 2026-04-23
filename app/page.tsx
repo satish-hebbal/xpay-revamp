@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import Fold2 from "@/components/sections/Fold2";
+import FoldDevBanner from "@/components/sections/FoldDevBanner";
 import Fold3 from "@/components/sections/Fold3";
 import Fold4 from "@/components/sections/Fold4";
 import FoldBenefits from "@/components/sections/FoldBenefits";
@@ -32,10 +33,8 @@ export default function Home() {
       {/* Fold 5 */}
       <Fold5 />
 
-      {/* Fold 6 — placeholder */}
-      <section className="relative z-30 w-full min-h-[200px] bg-white border-t border-[#E5E7EB] flex items-center justify-center">
-        <span className="text-2xl font-semibold text-gray-300">Fold 6</span>
-      </section>
+      {/* Dev banner */}
+      <FoldDevBanner />
 
       {/* Fold 7 — Testimonials */}
       <Fold7 />

@@ -305,9 +305,9 @@ export default function Fold5() {
   const productBottom = PY + 30;
 
   return (
-    <section className="relative z-30 w-full bg-white pt-20 pb-20">
+    <section className="relative z-30 w-full bg-white pt-20 pb-20 lg:pt-24 lg:pb-24">
       {/* Intro paragraph */}
-      <div className="max-w-[1200px] mx-auto px-6 mb-14 mt-16">
+      <div className="max-w-[1200px] mx-auto px-6 mb-12">
         <p className="text-[20px] max-w-[850px] lg:text-[24px] font-medium text-[#000000]/75 leading-relaxed" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
           Your customers pay in their currency, from anywhere in the world. 
           <span style={{ background: "linear-gradient(90deg, #45FFE9,  #1D83FF, #45B1FF )", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}> XPay</span> 

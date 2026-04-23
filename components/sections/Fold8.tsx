@@ -99,10 +99,10 @@ function AccordionItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-[#E5E7EB] last:border-b-0">
+    <div>
       <button
         onClick={onToggle}
-        className="w-full flex items-start justify-between gap-6 py-5 text-left"
+        className="w-full flex items-center justify-between gap-6 py-5 text-left"
         aria-expanded={open}
       >
         <span
@@ -111,25 +111,36 @@ function AccordionItem({
         >
           {q}
         </span>
+        {/* Chevron rotates 180° on open — matches Google PAA behaviour */}
         <span
-          className="shrink-0 mt-0.5 w-6 h-6 rounded-full border border-[#E5E7EB] flex items-center justify-center transition-transform duration-200"
-          style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
+          className="shrink-0 w-7 h-7 rounded-full bg-[#F3F4F6] flex items-center justify-center"
+          style={{
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+          }}
         >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M6 1v10M1 6h10" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2.5 5L7 9.5L11.5 5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
       </button>
+
+      {/* grid-template-rows trick — animates to actual content height, no fixed maxHeight */}
       <div
-        className="overflow-hidden transition-all duration-300"
-        style={{ maxHeight: open ? "600px" : "0px" }}
+        style={{
+          display: "grid",
+          gridTemplateRows: open ? "1fr" : "0fr",
+          transition: "grid-template-rows 0.3s cubic-bezier(0.4,0,0.2,1)",
+        }}
       >
-        <p
-          className="text-[14px] lg:text-[15px] text-[#6B7280] leading-relaxed pb-5"
-          style={sf}
-        >
-          {a}
-        </p>
+        <div style={{ overflow: "hidden" }}>
+          <p
+            className="text-[14px] lg:text-[15px] text-[#6B7280] leading-relaxed pb-5"
+            style={sf}
+          >
+            {a}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -145,11 +156,11 @@ export default function Fold8() {
   const right = FAQS.slice(half);
 
   return (
-    <section className="relative z-30 w-full bg-[#F9FAFB] pt-20 pb-24">
+    <section className="relative z-30 w-full bg-[#F9FAFB] pt-20 pb-20 lg:pt-24 lg:pb-24">
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* Header */}
-        <div className="max-w-[700px] mb-14">
+        <div className="max-w-[700px] mb-12">
           <h2
             className="text-[36px] sm:text-[48px] lg:text-[54px] font-medium text-[#0A0A0A] leading-[1.05] tracking-[-0.03em] mb-5"
             style={sf}
@@ -175,7 +186,7 @@ export default function Fold8() {
         {/* Two-column accordion (desktop) / single column (mobile) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-12">
           {/* Left column */}
-          <div className="bg-white rounded-2xl border border-[#E5E7EB] px-7 divide-y-0">
+          <div className="bg-white rounded-2xl border border-[#E5E7EB] px-7 divide-y divide-[#E5E7EB]">
             {left.map((faq, i) => (
               <AccordionItem
                 key={i}
@@ -187,7 +198,7 @@ export default function Fold8() {
             ))}
           </div>
           {/* Right column */}
-          <div className="bg-white rounded-2xl border border-[#E5E7EB] px-7 mt-4 lg:mt-0 divide-y-0">
+          <div className="bg-white rounded-2xl border border-[#E5E7EB] px-7 mt-4 lg:mt-0 divide-y divide-[#E5E7EB]">
             {right.map((faq, i) => (
               <AccordionItem
                 key={i}

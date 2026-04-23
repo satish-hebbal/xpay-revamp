@@ -121,9 +121,9 @@ function PulsingDivider({ index }: { index: number }) {
 
 export default function Fold4() {
   return (
-    <section className="relative z-30 w-full bg-white pt-20 pb-0 border-b border-[#E5E7EB]">
+    <section className="relative z-30 w-full bg-white pt-20 pb-0 lg:pt-24 border-b border-[#E5E7EB]">
       {/* header */}
-      <div className="max-w-[1200px] mx-auto px-6 mb-14 mt-16">
+      <div className="max-w-[1200px] mx-auto px-6 mb-12">
         <h2
           className="text-[36px] sm:text-[48px] lg:text-[54px] font-medium text-[#0A0A0A] leading-[1.05] tracking-[-0.03em] mb-5"
           style={{ fontFamily: "'SF Pro Display', sans-serif" }}

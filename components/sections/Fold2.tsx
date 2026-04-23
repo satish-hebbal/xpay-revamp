@@ -728,7 +728,7 @@ function GradSuffix({ children }: { children: React.ReactNode }) {
 
 export default function Fold2() {
   return (
-    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-24 lg:bg-white lg:border-t lg:border-[#E5E7EB] lg:-mt-52 lg:pt-10">
+    <section className="relative z-30 w-full bg-white border-t-0 pt-0 pb-20 lg:bg-white lg:border-t lg:border-[#E5E7EB] lg:-mt-52 lg:pt-10">
       <div className="max-w-[1200px] mx-auto px-6 space-y-6">
 
         {/* Stats bar */}
