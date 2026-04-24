@@ -71,6 +71,9 @@ export default function XGraphic() {
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
           }
+          .xg-green-mobile {
+            transform: translateX(-60px);
+          }
         }
       `}</style>
 
@@ -116,7 +119,7 @@ export default function XGraphic() {
         </div>
 
         {/* Green glass */}
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
+        <div className="xg-green-mobile" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
           <div style={{ position: "relative", borderTopLeftRadius: 16, borderTopRightRadius: 6, borderBottomRightRadius: 16, borderBottomLeftRadius: 6, transform: "skewX(32deg)" }}>
             <div style={{ width: 175, height: 300, borderTopLeftRadius: 16, borderTopRightRadius: 6, borderBottomRightRadius: 16, borderBottomLeftRadius: 6, position: "relative", overflow: "hidden", background: GRADIENT, border: "1px solid rgba(255,255,255,0.7)", boxSizing: "border-box" }}>
               <div className="xg-glass-layer1" />

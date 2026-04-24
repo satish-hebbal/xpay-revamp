@@ -16,7 +16,7 @@ const companies = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-auto lg:h-[126svh] pt-[72px] bg-white flex flex-col overflow-hidden">
+    <section className="relative w-full h-auto lg:min-h-[126svh] pt-[72px] bg-white flex flex-col overflow-hidden lg:overflow-visible">
       <div id="nav-sentinel" className="absolute top-[100px] left-0 h-1 w-full pointer-events-none" />
       {/* Hero asset — desktop: clip inside positioned frame */}
       <div className="hidden lg:block absolute -top-16 w-[58%] h-[115vh] overflow-hidden pointer-events-none z-20 right-[-13rem] xl:right-[-11rem]">
@@ -25,10 +25,10 @@ export default function Hero() {
 
       {/* Hero asset — mobile: bleed freely; clipping is only at section edges (full width), no inner overflow box */}
       <div
-        className="lg:hidden pointer-events-none absolute left-0 right-0 top-[52px] z-[5] h-[min(48vh,420px)] min-h-[260px]"
+        className="lg:hidden pointer-events-none absolute left-0 right-0 top-[52px] z-[5] h-[min(36vh,300px)] min-h-[200px]"
         aria-hidden
       >
-        <div className="absolute top-6 bottom-0 left-[40%] min-h-[260px] -right-[80vw] translate-x-[16vw] translate-y-2 sm:left-[44%] sm:-right-[64vw] sm:translate-x-[18vw]">
+        <div className="absolute top-6 bottom-0 left-[40%] min-h-[200px] -right-[80vw] translate-x-[calc(16vw+50px)] translate-y-2 sm:left-[44%] sm:-right-[64vw] sm:translate-x-[18vw]">
           <XGraphic />
         </div>
       </div>
@@ -126,9 +126,14 @@ export default function Hero() {
         </div>
 
         {/* Trusted by — marquee, full width, below CTA */}
-        <div className="relative z-10 w-full mt-4 pt-4 pb-20 lg:mt-4 lg:pt-0 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
-          <div className="lg:hidden absolute inset-0 -left-6 -right-6 bg-white z-[1]" />
-          <div className="relative z-[2]">
+        <style>{`
+          @media (min-resolution: 1.05dppx) and (max-resolution: 1.15dppx) and (min-width: 1024px) {
+            .hero-trusted-by { padding-bottom: 60px !important; }
+          }
+        `}</style>
+        <div className="hero-trusted-by relative z-10 w-full mt-4 pt-4 pb-20 lg:mt-4 lg:pt-0 lg:pb-0 lg:max-w-[800px] min-[1291px]:max-w-[950px]">
+          <div className="lg:hidden absolute inset-0 -left-6 -right-6 bg-white z-[6]" style={{ borderTop: "1px solid", borderImage: "linear-gradient(to right, rgba(47,140,254,0), #2f8cfe) 1" }} />
+          <div className="relative z-[7]">
           <p className="text-sm font-medium mb-6" style={{ color: "rgba(0,0,0,0.25)" }}>
             Trusted by brands that move fast.
           </p>
