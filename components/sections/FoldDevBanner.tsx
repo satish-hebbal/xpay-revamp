@@ -10,7 +10,7 @@ export default function FoldDevBanner() {
         >
           Reliable, developer-first payment infrastructure for every stack.{" "}
           <span className="text-[#000000]/30">
-            Integrate xPay with flexible APIs, webhooks, and SDKs — go live in minutes.
+            Integrate xPay with flexible APIs, webhooks, and SDKs. Go live in minutes.
           </span>
         </p>
 
