@@ -27,6 +27,7 @@ const RECEIVE_ITEMS = [
 
 /* ── Helpers ─────────────────────────────────────────────────── */
 
+
 function useCycle(arr: unknown[], ms: number) {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
@@ -115,7 +116,8 @@ function CountryCarousel() {
                   transition: "opacity 0.3s ease",
                 }}
               >
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#111827", fontFamily: "'SF Pro Display', sans-serif" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#111827", fontFamily: "'SF Pro Display', sans-serif" }}>
+                  <img src={`https://flagsapi.com/${c.code}/flat/32.png`} alt={c.code} style={{ width: 22, height: 22, objectFit: "contain", flexShrink: 0 }} />
                   {c.label}
                 </span>
                 <div style={{ display: "flex", gap: 6, alignItems: "center" }}>

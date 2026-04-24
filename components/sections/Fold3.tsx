@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Fold3() {
   return (
-    <section className="relative z-30 w-full bg-white pt-20 pb-0 lg:pt-24 overflow-hidden">
+    <section className="relative z-30 w-full bg-white pt-8 pb-0 lg:pt-24 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* Text block */}

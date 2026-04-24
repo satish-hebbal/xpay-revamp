@@ -6,16 +6,16 @@ import Image from "next/image";
 /* ─── Section 1: Subscription Table ─── */
 
 const subscriptionRows = [
-  { name: "Acme Corp",     sub: "USD · United States",  method: "Visa",       last: "4242", amount: "$299.00",    color: "#6B7AEC" },
-  { name: "Pixel Labs",    sub: "EUR · Germany",        method: "Mastercard", last: "8326", amount: "€279.00",    color: "#9B6BEC" },
-  { name: "Zeta Digital",  sub: "GBP · United Kingdom", method: "PayPal",     email: "zeta@digital.io", amount: "£249.00",    color: "#4BBFB5" },
-  { name: "NovaSpark Inc", sub: "SGD · Singapore",      method: "Klarna",     note: "Buy now, pay later", amount: "S$1,850.00", color: "#E8A94A" },
-  { name: "ByteFlow Co",   sub: "CNY · China",          method: "Alipay",     last: "7731", amount: "¥2,100.00",  color: "#EC6BAF" },
-  { name: "Lumio SaaS",    sub: "AUD · Australia",      method: "Visa",       last: "9912", amount: "A$399.00",   color: "#4A9EEC" },
-  { name: "Driftware",     sub: "CAD · Canada",         method: "Mastercard", last: "1155", amount: "C$249.00",   color: "#A8EC6B" },
-  { name: "Heliox Inc",    sub: "JPY · Japan",          method: "Alipay",     last: "3307", amount: "¥5,400.00",  color: "#EC9B6B" },
-  { name: "Solara HQ",     sub: "BRL · Brazil",         method: "PayPal",     email: "solara@hq.io",    amount: "R$1,200.00", color: "#6BECB5" },
-  { name: "Torchvault",    sub: "MXN · Mexico",         method: "Klarna",     note: "Pay later",         amount: "MX$890.00",  color: "#EC6B6B" },
+  { name: "Acme Corp",     cc: "US", sub: "USD · United States",  method: "Visa",       last: "4242", amount: "$299.00",    color: "#6B7AEC" },
+  { name: "Pixel Labs",    cc: "DE", sub: "EUR · Germany",        method: "Mastercard", last: "8326", amount: "€279.00",    color: "#9B6BEC" },
+  { name: "Zeta Digital",  cc: "GB", sub: "GBP · United Kingdom", method: "PayPal",     email: "zeta@digital.io", amount: "£249.00",    color: "#4BBFB5" },
+  { name: "NovaSpark Inc", cc: "SG", sub: "SGD · Singapore",      method: "Klarna",     note: "Buy now, pay later", amount: "S$1,850.00", color: "#E8A94A" },
+  { name: "ByteFlow Co",   cc: "CN", sub: "CNY · China",          method: "Alipay",     last: "7731", amount: "¥2,100.00",  color: "#EC6BAF" },
+  { name: "Lumio SaaS",    cc: "AU", sub: "AUD · Australia",      method: "Visa",       last: "9912", amount: "A$399.00",   color: "#4A9EEC" },
+  { name: "Driftware",     cc: "CA", sub: "CAD · Canada",         method: "Mastercard", last: "1155", amount: "C$249.00",   color: "#A8EC6B" },
+  { name: "Heliox Inc",    cc: "JP", sub: "JPY · Japan",          method: "Alipay",     last: "3307", amount: "¥5,400.00",  color: "#EC9B6B" },
+  { name: "Solara HQ",     cc: "BR", sub: "BRL · Brazil",         method: "PayPal",     email: "solara@hq.io",    amount: "R$1,200.00", color: "#6BECB5" },
+  { name: "Torchvault",    cc: "MX", sub: "MXN · Mexico",         method: "Klarna",     note: "Pay later",         amount: "MX$890.00",  color: "#EC6B6B" },
 ];
 
 const methodIcon: Record<string, string> = {
@@ -98,7 +98,10 @@ function SubscriptionTable() {
               <div className="flex-1 flex items-center gap-6 min-w-0">
                 <div className="w-[200px] min-w-0">
                   <p className="text-[13px] font-medium text-[#111] truncate">{row.name}</p>
-                  <p className="text-[11px] text-[#9CA3AF]">{row.sub}</p>
+                  <p className="text-[11px] text-[#9CA3AF] flex items-center gap-1">
+                    <img src={`https://flagsapi.com/${row.cc}/flat/32.png`} alt={row.cc} style={{ width: 14, height: 14, objectFit: "contain", flexShrink: 0 }} />
+                    {row.sub}
+                  </p>
                 </div>
                 <div className="flex items-center gap-1.5 flex-shrink-0 lg:w-[180px]">
                   <div className="w-6 h-6 rounded-full bg-[#F5F5F5] flex items-center justify-center flex-shrink-0">
